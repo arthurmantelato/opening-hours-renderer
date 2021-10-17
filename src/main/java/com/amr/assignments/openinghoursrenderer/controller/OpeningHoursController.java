@@ -46,13 +46,13 @@ public class OpeningHoursController {
     }
 
     /**
-     * Global exception handler to reply with more friendly error message when an exception occurs
+     * Exception handler to reply with more friendly error message when an exception occurs while parsing request input
      *
      * @param ex Exception to be handled
-     * @return error message with InternalServerError status code (500)
+     * @return error message with BadRequest status code (400)
      */
     @ExceptionHandler({HttpMessageNotReadableException.class})
-    public ResponseEntity handleJsonMappingException(final Exception ex) {
+    public ResponseEntity handleHttpMessageNotReadableException(final HttpMessageNotReadableException ex) {
         log.error("Invalid data received", ex);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
